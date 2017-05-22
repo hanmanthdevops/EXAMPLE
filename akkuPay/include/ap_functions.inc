@@ -37,7 +37,7 @@
 
 		$cfields = array("title","deduct_code","calc_freq","garn_method","amount","start_date","stop_date","ins_class");
 
-		$oque="SELECT title,deduct_code,calc_freq,garn_method,amount,start_date,stop_date,ins_class,PushStatus FROM mpHR_deductions WHERE type='D' AND process='Y' AND locid='".$nrow['locid']."' AND empsno='".$nrow['empsno']."' AND deduct_code='".$nrow['deduct_code']."' ORDER BY pdate DESC limit 1";
+		$oque="SELECT title,deduct_code,calc_freq,garn_method,amount,start_date,stop_date,ins_class,PushStatus FROM mpHR_deductions WHERE type='D' AND process!='N' AND locid='".$nrow['locid']."' AND empsno='".$nrow['empsno']."' AND deduct_code='".$nrow['deduct_code']."' ORDER BY pdate DESC limit 1";
 		$ores=mysql_query($oque,$db);
 		$orow=mysql_fetch_assoc($ores);
 		if(mysql_num_rows($ores)>0 && $orow['PushStatus']!="Deleted")
@@ -64,7 +64,7 @@
 
 		$cfields = array("title","deduct_code","calc_freq","garn_method","amount","start_date","stop_date","ins_class","garn_type","docket_no","date_issued","sdu_state","sdu_case_id");
 
-		$oque="SELECT title,deduct_code,calc_freq,garn_method,amount,start_date,stop_date,ins_class,garn_type,docket_no,date_issued,sdu_state,sdu_case_id,PushStatus FROM mpHR_deductions WHERE type='G' AND process='Y' AND locid='".$nrow['locid']."' AND empsno='".$nrow['empsno']."' AND deduct_code='".$nrow['deduct_code']."' ORDER BY pdate DESC limit 1";
+		$oque="SELECT title,deduct_code,calc_freq,garn_method,amount,start_date,stop_date,ins_class,garn_type,docket_no,date_issued,sdu_state,sdu_case_id,PushStatus FROM mpHR_deductions WHERE type='G' AND process!='N' AND locid='".$nrow['locid']."' AND empsno='".$nrow['empsno']."' AND deduct_code='".$nrow['deduct_code']."' ORDER BY pdate DESC limit 1";
 		$ores=mysql_query($oque,$db);
 		$orow=mysql_fetch_assoc($ores);
 		if(mysql_num_rows($ores)>0 && $orow['PushStatus']!="Deleted")
@@ -91,7 +91,7 @@
 
 		$cfields = array("acct_type1","transit_no1","account_no1","dep_method1","dep_amount1","acct_type2","transit_no2","account_no2","dep_method2","dep_amount2","acct_type3","transit_no3","account_no3","dep_method3","dep_amount3");
 
-		$oque="SELECT acct_type1,transit_no1,account_no1,dep_method1,dep_amount1,acct_type2,transit_no2,account_no2,dep_method2,dep_amount2,acct_type3,transit_no3,account_no3,dep_method3,dep_amount3 FROM mpHR_deposits WHERE process='Y' AND locid='".$nrow['locid']."' AND empsno='".$nrow['empsno']."' ORDER BY pdate DESC limit 1";
+		$oque="SELECT acct_type1,transit_no1,account_no1,dep_method1,dep_amount1,acct_type2,transit_no2,account_no2,dep_method2,dep_amount2,acct_type3,transit_no3,account_no3,dep_method3,dep_amount3 FROM mpHR_deposits WHERE process!='N' AND locid='".$nrow['locid']."' AND empsno='".$nrow['empsno']."' ORDER BY pdate DESC limit 1";
 		$ores=mysql_query($oque,$db);
 		$orow=mysql_fetch_assoc($ores);
 		if(mysql_num_rows($ores)>0)

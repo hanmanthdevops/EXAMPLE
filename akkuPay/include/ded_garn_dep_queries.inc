@@ -88,26 +88,26 @@
 		{
 			if($dedCodes[$payEmployees[$j]['empsno']]!="")
 			{
-				$pque="SELECT DISTINCT(parid) as parid FROM mpHR_deductions WHERE type='D' AND process='Y' AND locid='".$payEmployees[$j]['locid']."' AND empsno='".$payEmployees[$j]['empsno']."' AND PushStatus!='Deleted' ORDER BY pdate DESC limit 1";
+				$pque="SELECT DISTINCT(parid) as parid FROM mpHR_deductions WHERE type='D' AND process!='N' AND locid='".$payEmployees[$j]['locid']."' AND empsno='".$payEmployees[$j]['empsno']."' AND PushStatus!='Deleted' ORDER BY pdate DESC limit 1";
 				$pres=mysql_query($pque,$db);
 				$prow=mysql_fetch_assoc($pres);
 				if(mysql_num_rows($pres)>0)
 				{
 					$pd_parid=$prow['parid'];
-					$dique="INSERT INTO mpHR_deductions (parid,locid,empsno,employee_id,type,title,deduct_code,calc_freq,garn_method,amount,start_date,stop_date,ins_class,PushStatus,PushDescription,process,mpError) SELECT '$batchid',locid,empsno,employee_id,type,title,deduct_code,calc_freq,garn_method,amount,start_date,stop_date,ins_class,'Deleted' as PushStatus,'Not Included in Push -- Needs to delete manually' as PushDescription,'N','' FROM mpHR_deductions WHERE type='D' AND process='Y' AND locid='".$payEmployees[$j]['locid']."' AND empsno='".$payEmployees[$j]['empsno']."' AND parid='$pd_parid' AND PushStatus!='Deleted' AND deduct_code NOT IN ('".implode("','",$dedCodes[$payEmployees[$j]['empsno']])."')";
+					$dique="INSERT INTO mpHR_deductions (parid,locid,empsno,employee_id,type,title,deduct_code,calc_freq,garn_method,amount,start_date,stop_date,ins_class,PushStatus,PushDescription,process,mpError) SELECT '$batchid',locid,empsno,employee_id,type,title,deduct_code,calc_freq,garn_method,amount,start_date,stop_date,ins_class,'Deleted' as PushStatus,'Not Included in Push -- Needs to delete manually' as PushDescription,'N','' FROM mpHR_deductions WHERE type='D' AND process!='N' AND locid='".$payEmployees[$j]['locid']."' AND empsno='".$payEmployees[$j]['empsno']."' AND parid='$pd_parid' AND PushStatus!='Deleted' AND deduct_code NOT IN ('".implode("','",$dedCodes[$payEmployees[$j]['empsno']])."')";
 					mysql_query($dique,$db);
 				}
 			}
 
 			if($garCodes[$payEmployees[$j]['empsno']]!="")
 			{
-				$pque="SELECT DISTINCT(parid) as parid FROM mpHR_deductions WHERE type='G' AND process='Y' AND locid='".$payEmployees[$j]['locid']."' AND empsno='".$payEmployees[$j]['empsno']."' AND PushStatus!='Deleted' ORDER BY pdate DESC limit 1";
+				$pque="SELECT DISTINCT(parid) as parid FROM mpHR_deductions WHERE type='G' AND process!='N' AND locid='".$payEmployees[$j]['locid']."' AND empsno='".$payEmployees[$j]['empsno']."' AND PushStatus!='Deleted' ORDER BY pdate DESC limit 1";
 				$pres=mysql_query($pque,$db);
 				$prow=mysql_fetch_assoc($pres);
 				if(mysql_num_rows($pres)>0)
 				{
 					$pg_parid=$prow['parid'];
-					$gique="INSERT INTO mpHR_deductions (parid,locid,empsno,employee_id,type,title,deduct_code,calc_freq,garn_method,amount,start_date,stop_date,ins_class,garn_type,docket_no,date_issued,sdu_state,sdu_case_id,PushStatus,PushDescription,process,mpError) SELECT '$batchid',locid,empsno,employee_id,type,title,deduct_code,calc_freq,garn_method,amount,start_date,stop_date,ins_class,garn_type,docket_no,date_issued,sdu_state,sdu_case_id,'Deleted' as PushStatus,'Not Included in Push -- Needs to delete manually' as PushDescription,'N','' FROM mpHR_deductions WHERE type='G' AND process='Y' AND locid='".$payEmployees[$j]['locid']."' AND empsno='".$payEmployees[$j]['empsno']."' AND parid='$pg_parid' AND PushStatus!='Deleted' AND deduct_code NOT IN ('".implode("','",$garCodes[$payEmployees[$j]['empsno']])."')";
+					$gique="INSERT INTO mpHR_deductions (parid,locid,empsno,employee_id,type,title,deduct_code,calc_freq,garn_method,amount,start_date,stop_date,ins_class,garn_type,docket_no,date_issued,sdu_state,sdu_case_id,PushStatus,PushDescription,process,mpError) SELECT '$batchid',locid,empsno,employee_id,type,title,deduct_code,calc_freq,garn_method,amount,start_date,stop_date,ins_class,garn_type,docket_no,date_issued,sdu_state,sdu_case_id,'Deleted' as PushStatus,'Not Included in Push -- Needs to delete manually' as PushDescription,'N','' FROM mpHR_deductions WHERE type='G' AND process!='N' AND locid='".$payEmployees[$j]['locid']."' AND empsno='".$payEmployees[$j]['empsno']."' AND parid='$pg_parid' AND PushStatus!='Deleted' AND deduct_code NOT IN ('".implode("','",$garCodes[$payEmployees[$j]['empsno']])."')";
 					mysql_query($gique,$db);
 				}
 			}
