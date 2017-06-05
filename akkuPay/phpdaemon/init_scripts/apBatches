@@ -12,7 +12,7 @@
 prog=apBatches
 phpscriptpath="/usr/bin/db-driver/akkuPay/"
 phpscript="pushPayBatches.php"
-sleep="900"
+sleep="300"
 lockfile=/var/lock/subsys/$prog
 
 start() { 
