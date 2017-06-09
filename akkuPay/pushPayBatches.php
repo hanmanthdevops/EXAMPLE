@@ -1,6 +1,8 @@
 <?php
 	ini_set("display_errors","1");
 
+
+
 	require_once("include/class.dbconnection.inc");
 	require_once('include/nusoap.php');
 	require_once('include/json_functions.inc');
